@@ -9,9 +9,12 @@ import org.springframework.statemachine.config.builders.StateMachineStateConfigu
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 import org.springframework.statemachine.guard.Guard;
 
+import java.util.logging.Logger;
+
 @Configuration
 @EnableStateMachine
 public class JunctionStateMachineConfiguration extends StateMachineConfigurerAdapter<String, String> {
+    private static final Logger LOGGER = Logger.getLogger(JunctionStateMachineConfiguration.class.getName());
 
     @Override
     public void configure(StateMachineConfigurationConfigurer<String, String> config)
@@ -43,18 +46,24 @@ public class JunctionStateMachineConfiguration extends StateMachineConfigurerAda
                 .source("SJ")
                 .first("high", highGuard())
                 .then("medium", mediumGuard())
+
+//                .first("medium", mediumGuard())
+//                .then("high", highGuard())
+
                 .last("low")
                 .and().withExternal()
                 .source("low").target("SF").event("end");
     }
 
     @Bean
-    public Guard<String, String> mediumGuard() {
+    public Guard<String, String> highGuard() {
+        LOGGER.info("HighGuard");
         return ctx -> false;
     }
 
     @Bean
-    public Guard<String, String> highGuard() {
+    public Guard<String, String> mediumGuard() {
+        LOGGER.info("mediumGuard");
         return ctx -> false;
     }
 }
