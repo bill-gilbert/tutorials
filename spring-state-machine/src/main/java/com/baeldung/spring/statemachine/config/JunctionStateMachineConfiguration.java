@@ -2,6 +2,7 @@ package com.baeldung.spring.statemachine.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.StateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
@@ -44,8 +45,8 @@ public class JunctionStateMachineConfiguration extends StateMachineConfigurerAda
                 .and()
                 .withJunction()
                 .source("SJ")
-                .first("high", highGuard())
-                .then("medium", mediumGuard())
+                .first("high", highGuard(), high())
+                .then("medium", mediumGuard(), medium())
 
 //                .first("medium", mediumGuard())
 //                .then("high", highGuard())
@@ -65,5 +66,17 @@ public class JunctionStateMachineConfiguration extends StateMachineConfigurerAda
     public Guard<String, String> mediumGuard() {
         LOGGER.info("mediumGuard");
         return ctx -> false;
+    }
+
+    public Action<String, String> high() {
+        return ctx -> LOGGER.info("High " + ctx
+                .getTarget()
+                .getId());
+    }
+
+    public Action<String, String> medium() {
+        return ctx -> LOGGER.info("Medium " + ctx
+                .getTarget()
+                .getId());
     }
 }
