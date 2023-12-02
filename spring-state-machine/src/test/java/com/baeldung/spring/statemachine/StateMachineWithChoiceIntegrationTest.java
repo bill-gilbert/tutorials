@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
+import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -69,7 +70,6 @@ public class StateMachineWithChoiceIntegrationTest {
         assertEquals("G", stateMachine.getState().getId());
     }
 
-    @Disabled
     @DisplayName("D state")
     @Test
     public void whenSimpleStringStateMachineEvents_stateD() {
@@ -83,9 +83,25 @@ public class StateMachineWithChoiceIntegrationTest {
     }
 
     @AfterEach
-    public void tearDown() {
-        stateMachine.stopReactively().block();
-        stateMachine.startReactively().block();
+    public void reset() {
+//        stateMachine.stop();
+//        stateMachine.start();
+//        stateMachine.stopReactively().block();
+//        stateMachine.startReactively().block();
+//        switch (stateMachine.getState().getId()) {
+//            case "G":
+//                stateMachine.sendEvent("EVENT_GA");
+//                break;
+//            case "E":
+//                stateMachine.sendEvent("EVENT_EA");
+//                break;
+//            case "F":
+//                stateMachine.sendEvent("EVENT_FA");
+//                break;
+//            case "D":
+//                stateMachine.sendEvent("EVENT_DA");
+//                break;
+//        }
     }
 }
 

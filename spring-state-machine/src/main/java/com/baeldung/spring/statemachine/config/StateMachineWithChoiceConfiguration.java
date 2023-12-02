@@ -79,7 +79,34 @@ public class StateMachineWithChoiceConfiguration extends StateMachineConfigurerA
                 .withExternal()
                 .source("C")
                 .target("G")
-                .event("EVENT_CG");
+                .event("EVENT_CG")
+                .and()
+
+                .withExternal()
+                .source("G")
+                .target("A")
+                .event("EVENT_GA")
+                .and()
+
+                .withExternal()
+                .source("E")
+                .target("A")
+                .event("EVENT_EA")
+                .and()
+
+                .withExternal()
+                .source("F")
+                .target("A")
+                .event("EVENT_FA")
+                .and()
+
+                .withExternal()
+                .source("D")
+                .target("none")
+                .event("EVENT_DA")
+                .and()
+
+        ;
     }
 
     @Bean
