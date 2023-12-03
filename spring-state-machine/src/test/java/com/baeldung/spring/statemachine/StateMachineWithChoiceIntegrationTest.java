@@ -20,6 +20,8 @@ public class StateMachineWithChoiceIntegrationTest {
 
     @BeforeEach
     public void setUp() {
+       stateMachine.stopReactively().block();
+        stateMachine.startReactively().block();
         stateMachine.startReactively().block();
     }
 
@@ -61,7 +63,7 @@ public class StateMachineWithChoiceIntegrationTest {
         assertEquals("A", stateMachine.getState().getId());
 
         stateMachine.sendEvent("EVENT_AB");
-        assertEquals("B", stateMachine.getState().getId());
+        Assertions.assertEquals("B", stateMachine.getState().getId());
 
         stateMachine.sendEvent("EVENT_BC");
         assertEquals("C", stateMachine.getState().getId());
