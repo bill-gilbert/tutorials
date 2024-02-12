@@ -57,6 +57,7 @@ public class PathVariablesController {
                 }
             }
         }
+        model.addAttribute("orderUrl", "http://spb.ru/order/121212/operation/read");
         return "pathvariables/view";
     }
 }
